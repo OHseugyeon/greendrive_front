@@ -235,14 +235,13 @@ const Login = () => {
   const [failDivAdded, setFailDivAdded] = useState(false);
 
   const handleKakaoLogin = () => {
-    const Rest_api_key = "REST API KEY"; // REST API KEY
-    const redirect_uri = "http://localhost:3000/auth"; // Redirect URI
-
+    const Rest_api_key = "키 값"; // REST API KEY
+    const redirect_uri = "http://localhost:3000/login/oauth2/callback/kakao"; // Redirect URI
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
     window.location.href = kakaoURL;
   };
 
-  const BACKEND_URL = "" || "";
+  const BACKEND_URL = `서버 주소`;
   const onClick = async () => {
     const userData = {
       username: loginId,
@@ -251,7 +250,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${BACKEND_URL}/login/`, userData);
-      console.log("로그인 성공:", response.data);
+      console.log("로그인성공:", response.data);
       if (response.data.key) {
         localStorage.setItem("access_token", response.data.key);
         console.log("저장 성공");
